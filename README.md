@@ -79,7 +79,7 @@ else
   sudo dnf install "$RPM_FILE"
 fi
 ```
-> [!NOTE]
+> [!WARNING]
 > In the case of Fedora Atomic Desktop, a reboot is required to apply the
 > installed deployment.
 
@@ -120,7 +120,7 @@ else
   sudo dnf remove re-suspend
 fi
 ```
-> [!NOTE]
+> [!WARNING]
 > In the case of Fedora Atomic Desktop, a reboot is required to apply the
 > removal of the package.
 
