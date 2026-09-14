@@ -39,10 +39,14 @@ install -D -m 0644 %{SOURCE4} %{buildroot}%{_docdir}/%{name}/README.md
 install -D -m 0644 %{SOURCE5} %{buildroot}%{_docdir}/%{name}/LICENSE
 
 %post
-systemctl daemon-reload >/dev/null 2>&1 || :
+if ! systemctl daemon-reload >/dev/null 2>&1; then
+    echo "re-suspend: warning: systemd daemon-reload failed; run 'systemctl daemon-reload' manually or reboot." >&2
+fi
 
 %postun
-systemctl daemon-reload >/dev/null 2>&1 || :
+if ! systemctl daemon-reload >/dev/null 2>&1; then
+    echo "re-suspend: warning: systemd daemon-reload failed; run 'systemctl daemon-reload' manually or reboot." >&2
+fi
 
 %files
 %doc %{_docdir}/%{name}/README.md
