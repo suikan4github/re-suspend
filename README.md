@@ -75,11 +75,13 @@ RPM_FILE=$(printf '%s\n' ./rpmbuild/RPMS/noarch/re-suspend-*.rpm)
 
 if [ -n "$(command -v rpm-ostree 2>/dev/null)" ]; then
   sudo rpm-ostree install "$RPM_FILE"
-  systemctl reboot
 else
   sudo dnf install "$RPM_FILE"
 fi
 ```
+:::message
+In the case of Fedora Atomic Desktop, a reboot is required to apply the installed deployment. 
+:::
 
 The RPM scriptlet runs `systemctl daemon-reload` after installation. If the
 reload cannot be performed, installation continues with a warning. On Atomic
@@ -110,18 +112,18 @@ normal final wake or when a manual wake cancels the cycle.
 
 ## Remove
 
-On Fedora Workstation:
-
+To remove the package, use the following command:
 ```sh
-sudo dnf remove re-suspend
+if [ -n "$(command -v rpm-ostree 2>/dev/null)" ]; then
+  sudo rpm-ostree uninstall re-suspend
+else
+  sudo dnf remove re-suspend
+fi
 ```
+:::message
+In the case of Fedora Atomic Desktop, a reboot is required to apply the removal of the package. 
+:::
 
-On Fedora Atomic Desktop:
-
-```sh
-sudo rpm-ostree uninstall re-suspend
-systemctl reboot
-```
 
 After removal, systemd no longer loads the package drop-ins. A pending
 one-shot re-suspend should be stopped before removal if necessary.
