@@ -79,9 +79,9 @@ else
   sudo dnf install "$RPM_FILE"
 fi
 ```
-:::message
-In the case of Fedora Atomic Desktop, a reboot is required to apply the installed deployment. 
-:::
+> [!NOTE]
+> In the case of Fedora Atomic Desktop, a reboot is required to apply the
+> installed deployment.
 
 The RPM scriptlet runs `systemctl daemon-reload` after installation. If the
 reload cannot be performed, installation continues with a warning. On Atomic
@@ -120,9 +120,9 @@ else
   sudo dnf remove re-suspend
 fi
 ```
-:::message
-In the case of Fedora Atomic Desktop, a reboot is required to apply the removal of the package. 
-:::
+> [!NOTE]
+> In the case of Fedora Atomic Desktop, a reboot is required to apply the
+> removal of the package.
 
 
 After removal, systemd no longer loads the package drop-ins. A pending
