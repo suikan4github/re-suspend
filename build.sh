@@ -24,7 +24,7 @@ function build() {
 
     cleanup() {
         log_message "${MODULE_NAME}: Removing the work toolbox..."
-        toolbox rm --container "${WORK_CONTAINER}" --force >/dev/null 2>&1 || true
+        toolbox rm --force "${WORK_CONTAINER}" >/dev/null 2>&1 || true
     }
     trap cleanup EXIT
 
